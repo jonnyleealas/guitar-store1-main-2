@@ -13,14 +13,12 @@ import java.util.Map;
 
 
 public class GuitarController extends Controller {
-
     @Inject
     public GuitarRepository guitarRepository;
 
     public Result jsonResponse(String field, Object data) {
         Map<String, Object> response = new HashMap<>();
         response.put(field, data);
-
         return ok(Json.toJson(response)).as("application/json");
     }
 
@@ -37,20 +35,15 @@ public class GuitarController extends Controller {
     @Transactional
     public Result create() {
         Guitar guitarRequest = Json.fromJson(request().body().asJson().findPath("guitar"), Guitar.class);
-
         guitarRequest.id = guitarRepository.add(guitarRequest).id;
-        System.out.println(guitarRequest.getId());
         return jsonResponse("guitar",Json.toJson(guitarRequest)).as("application/json");
     }
 
     @Transactional
     public Result update(int id) {
         Guitar guitarRequest = Json.fromJson(request().body().asJson().findPath("guitar"), Guitar.class);
-
         guitarRequest.setId(id);
-
         guitarRepository.update(guitarRequest);
-
         return jsonResponse("guitar",Json.toJson(guitarRequest)).as("application/json");
     }
 

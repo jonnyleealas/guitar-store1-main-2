@@ -23,25 +23,18 @@ public class GuitarRepository {
     }
 
     public Guitar add(Guitar guitar) {
-        System.out.println("im in add"+ guitar.id);
         jpaApi.em().persist(guitar);
          return guitar;
     }
 
     public void update(Guitar guitar) {
-
-        System.out.println("Im in update");
         jpaApi.em().merge(guitar);
     }
 
     public void delete(int id) {
-        System.out.println("inside delete");
         jpaApi.em().createNativeQuery("DELETE FROM guitars WHERE id = :id")
                 .setParameter("id", id).executeUpdate();
     }
-
-
-
 }
 
 

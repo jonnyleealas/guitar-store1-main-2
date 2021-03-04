@@ -1,23 +1,21 @@
 package controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import org.mindrot.jbcrypt.BCrypt;
 import play.mvc.Results;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Authentication extends Controller {
+
     public Result jsonResponse(String field, Object data) {
         Map<String, Object> response = new HashMap<>();
         response.put(field, data);
-
         return ok(Json.toJson(response)).as("application/json");
     }
+
     public static class Login {
         public String email;
         public String password;
@@ -48,7 +46,6 @@ public class Authentication extends Controller {
 
         User user = new User();
 
-        // check
        if (loginRequest.password.equals(user.password) && loginRequest.email.equals(user.email)) {
            session("email", loginRequest.email);
            System.out.println(user.password + " " + loginRequest.password );
@@ -63,14 +60,11 @@ public class Authentication extends Controller {
     }
 
     public Result checkSession() {
-        System.out.println(session("email"));
         String userEmail = session("email");
         if (userEmail == null) {
-
             return unauthorized();
         } else {
             return jsonResponse("success", userEmail);
         }
-
     }
 }
