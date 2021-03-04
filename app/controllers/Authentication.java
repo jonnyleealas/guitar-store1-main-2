@@ -28,20 +28,20 @@ public class Authentication extends Controller {
         public String password = "string";
     }
 
-    public static Result createErrorResponse(String key, Object obj){
+    public static Result createErrorResponse(String key, Object obj) {
         Map<String, Object> response = new HashMap<>();
         response.put(key, obj);
         return Results.status(422, Json.toJson(response));
     }
 // create container for our auth data
     @Transactional
-    public Result login(){
+    public Result login() {
       Login loginRequest = Json.fromJson(request().body().asJson(), Login.class);
-      if(loginRequest.email.isEmpty()){
+      if (loginRequest.email.isEmpty()) {
           String errorMessage = "enter email";
           return createErrorResponse("errors", errorMessage);
       }
-      if(loginRequest.password.isEmpty()){
+      if (loginRequest.password.isEmpty()) {
           String errorMessage = "enter password";
             return createErrorResponse("errors", errorMessage);
       }
@@ -49,7 +49,7 @@ public class Authentication extends Controller {
         User user = new User();
 
         // check
-       if(loginRequest.password.equals(user.password) && loginRequest.email.equals(user.email)){
+       if (loginRequest.password.equals(user.password) && loginRequest.email.equals(user.email)) {
            session("email", loginRequest.email);
            System.out.println(user.password + " " + loginRequest.password );
            return jsonResponse("success", user);
@@ -57,15 +57,15 @@ public class Authentication extends Controller {
        return unauthorized();
     }
 
-    public Result logout(){
+    public Result logout() {
         session().clear();
         return ok("{}").as("application/json");
     }
 
-    public Result checkSession(){
+    public Result checkSession() {
         System.out.println(session("email"));
         String userEmail = session("email");
-        if(userEmail == null) {
+        if (userEmail == null) {
 
             return unauthorized();
         } else {

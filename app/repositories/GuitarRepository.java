@@ -45,28 +45,7 @@ public class GuitarRepository {
 }
 
 
-//    public void delete(Guitar guitar) {
-//        jpaApi.em().remove(guitar);
-//    }
 
 
 
-
-//    public void add(Guitar guitar) {
-//        if (!findById(guitar.getId()).isPresent()) {
-//            guitar.setId(++guitarId);
-//            guitarList.add(guitar);
-//        }
-//    }
-
-//    public void update(Guitar guitar) {
-//        System.out.println("in update repo");
-//        Optional<Guitar> guitarOptional = findById(guitar.getId());
-//        if (guitarOptional.isPresent()) {
-//            Guitar guitarToUpdate = guitarOptional.get();
-//
-//            guitarToUpdate.setDescription(guitar.getDescription());
-//            guitarToUpdate.setName(guitar.getName());
-//        }
-//    }
 
