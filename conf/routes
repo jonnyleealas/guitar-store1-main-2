@@ -13,6 +13,12 @@ GET     /checkSession               controllers.Authentication.checkSession()
 POST    /login                      controllers.Authentication.login()
 GET     /logout                     controllers.Authentication.logout()
 
+# Test Routes
+GET     /people                    controllers.People.findAll()
+GET     /people/:id                controllers.People.findById(id: Integer)
+POST    /people                    controllers.People.create()
+PUT     /people/:id                controllers.People.update(id: Integer)
+DELETE  /people/:id                controllers.People.delete(id: Integer)
 # Map static resources from the /public folder to the /assets URL path
 
 
