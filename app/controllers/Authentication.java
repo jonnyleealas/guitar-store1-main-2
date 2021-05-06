@@ -23,7 +23,7 @@ public class Authentication extends Controller {
 
     public static class User {
         public String email = "email";
-        public String password = "string";
+        public String password = "password";
     }
 
     public static Result createErrorResponse(String key, Object obj) {
@@ -36,11 +36,11 @@ public class Authentication extends Controller {
     public Result login() {
       Login loginRequest = Json.fromJson(request().body().asJson(), Login.class);
       if (loginRequest.email.isEmpty()) {
-          String errorMessage = "enter email";
+          String errorMessage = "Please Login";
           return createErrorResponse("errors", errorMessage);
       }
       if (loginRequest.password.isEmpty()) {
-          String errorMessage = "enter password";
+          String errorMessage = "Please Enter Password";
             return createErrorResponse("errors", errorMessage);
       }
 
